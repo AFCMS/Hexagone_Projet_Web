@@ -1,0 +1,33 @@
+services:
+  app:
+    image: php:8-apache
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www/html:ro
+
+  mysql:
+    image: mysql
+    ports:
+      - "6033:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_user_pass
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    links:
+      - "mysql"
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+
+volumes:
+  dbdata:
