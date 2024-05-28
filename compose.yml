@@ -1,6 +1,6 @@
 services:
   app:
-    image: php:8-apache
+    build: .
     ports:
       - "8000:80"
     volumes:
