@@ -9,7 +9,7 @@ services:
   mysql:
     image: mysql
     ports:
-      - "6033:3306"
+      - "127.0.0.1:6033:3306"
     volumes:
       - dbdata:/var/lib/mysql
     environment:
@@ -23,7 +23,7 @@ services:
     links:
       - "mysql"
     ports:
-      - 8081:80
+      - "127.0.0.1:8081:80"
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
