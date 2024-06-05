@@ -22,12 +22,12 @@ class UsersManager
         $req->execute();
     }
 
-    public function readByName(string $name): User
+    public function readByName(string $name): User|false
     {
         $req = $this->db->prepare('SELECT * FROM users WHERE name = :name');
         $req->bindValue(':name', $name);
         $req->execute();
         $data = $req->fetch();
-        return new User($data);
+        return !$data ? false : new User($data);
     }
 }

@@ -21,7 +21,8 @@ if ($_POST) {
     $_POST["password"] = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 
-    if ($usersManager->readByName($_POST["name"])) {
+    $user = $usersManager->readByName($_POST["name"]);
+    if ($user !== false) {
         echo "This username is already taken";
         return;
     }
