@@ -3,7 +3,28 @@
 global $usersManager;
 
 if ($_POST) {
+    if ($_POST["name"] == "" || $_POST["password"] == "") {
+        echo "Please fill all fields";
+        return;
+    }
+
+    if (strlen($_POST["name"]) < 3) {
+        echo "Username must be at least 3 characters long";
+        return;
+    }
+
+    if (strlen($_POST["password"]) < 3) {
+        echo "Password must be at least 3 characters long";
+        return;
+    }
+
     $_POST["password"] = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+
+    if ($usersManager->readByName($_POST["name"])) {
+        echo "This username is already taken";
+        return;
+    }
 
     $usersManager->create($_POST);
 
@@ -15,7 +36,7 @@ if ($_POST) {
 ?>
 
     <h1>Register</h1>
-    <form action="register.php" method="post">
+    <form action="register.php" method="post" class="main-form">
         <label for="name">Username</label>
         <input type="text" name="name" id="name">
 
@@ -23,8 +44,7 @@ if ($_POST) {
         <input type="password" name="password" id="password">
 
         <button type="submit">Register</button>
+        <button type="button"><a href="login.php">Se connecter</a></button>
     </form>
-
-    <a href="login.php">Se connecter</a>
 
 <?php require('./layout/footer.php'); ?>

@@ -17,7 +17,7 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
 
     <h1>Login</h1>
 
-    <form action="login.php" method="post">
+    <form action="login.php" method="post" class="main-form">
         <label for="name">Username</label>
         <input type="text" name="name" id="name">
 
@@ -25,8 +25,8 @@ if (isset($_POST['name']) && isset($_POST['password'])) {
         <input type="password" name="password" id="password">
 
         <button type="submit">Login</button>
+        <button type="button"><a href="register.php">Créer un compte utilisateur</a></button>
     </form>
-    <a href="register.php">Créer un compte utilisateur</a>
 
 <?php
-require('./layout/header.php');
+require('./layout/footer.php');
