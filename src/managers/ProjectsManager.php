@@ -51,6 +51,9 @@ class ProjectsManager
         $req->execute();
     }
 
+    /**
+     * @return Project[]
+     */
     public function list(): array
     {
         $req = $this->db->prepare('SELECT * FROM projects');
