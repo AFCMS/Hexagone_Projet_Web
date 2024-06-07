@@ -4,6 +4,7 @@ require_once 'managers/ProjectsManager.php';
 require_once 'managers/ProjectsReviewManager.php';
 require_once 'managers/UsersManager.php';
 require_once 'models/Project.php';
+require_once 'models/ProjectReview.php';
 require_once 'models/User.php';
 
 $dbname = 'app_db';
