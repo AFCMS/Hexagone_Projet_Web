@@ -34,6 +34,9 @@ class ProjectsReviewManager
         return new ProjectReview($data);
     }
 
+    /**
+     * @return ProjectReview[]
+     */
     public function getForProject(int $projectId): array
     {
         $req = $this->db->prepare('SELECT * FROM projects_reviews WHERE project_id = :project_id');
