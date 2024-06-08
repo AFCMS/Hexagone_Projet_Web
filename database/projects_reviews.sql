@@ -6,7 +6,7 @@ CREATE TABLE `projects_reviews`
     `note`       int           NOT NULL,
     `text`       varchar(2048) NOT NULL,
     PRIMARY KEY (`id`),
-    KEY `project_id` (`project_id`),
+    UNIQUE KEY `project_id` (`project_id`, `user_name`),
     KEY `user_name` (`user_name`),
     CONSTRAINT `projects_reviews_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `projects_reviews_ibfk_2` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
