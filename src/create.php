@@ -20,6 +20,7 @@ function isGithubRepo($url): bool
 
 if (!$_SESSION && !$_SESSION['is_connected']) {
     echo "<script>window.location.href='login.php'</script>";
+    return;
 }
 
 if ($_POST) {
