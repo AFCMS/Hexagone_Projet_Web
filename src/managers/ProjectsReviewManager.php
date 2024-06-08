@@ -24,14 +24,14 @@ class ProjectsReviewManager
         $req->execute();
     }
 
-    public function get(int $id): ProjectReview
+    public function get(int $id): ProjectReview|false
     {
         $req = $this->db->prepare('SELECT * FROM projects_reviews WHERE id = :id');
         $req->bindValue(':id', $id);
         $req->execute();
 
         $data = $req->fetch();
-        return new ProjectReview($data);
+        return $data ? new ProjectReview($data) : false;
     }
 
     /**

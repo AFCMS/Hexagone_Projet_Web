@@ -61,23 +61,25 @@ if ($_POST) {
 
 ?>
 
-    <h1>Add project</h1>
+    <div class="main-container">
+        <form action="create.php" method="post" enctype="multipart/form-data" class="main-form projects-container">
+            <h1>Add project</h1>
+            <label for="name">Project Name</label>
+            <input type="text" name="name" id="name" maxlength="256" required>
 
-    <form action="create.php" method="post" enctype="multipart/form-data" class="main-form">
-        <label for="name">Project Name</label>
-        <input type="text" name="name" id="name" maxlength="256" required>
+            <label for="gh_url">GitHub URL</label>
+            <input type="url" name="gh_url" id="gh_url" maxlength="256" required
+                   placeholder="https://github.com/AFCMS/test_repo">
 
-        <label for="gh_url">GitHub URL</label>
-        <input type="url" name="gh_url" id="gh_url" maxlength="256" required
-               placeholder="https://github.com/AFCMS/test_repo">
+            <label for="icon">Icon</label>
+            <input type="file" name="icon" id="icon" required accept="image/png">
 
-        <label for="icon">Icon</label>
-        <input type="file" name="icon" id="icon" required accept="image/png">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" maxlength="2048" required></textarea>
 
-        <label for="description">Description</label>
-        <textarea name="description" id="description" maxlength="2048" required></textarea>
+            <input type="submit" value="Add project" class="bouton">
+        </form>
 
-        <input type="submit" value="Add project" class="bouton">
-    </form>
+    </div>
 
 <?php require('./layout/footer.php'); ?>

@@ -36,16 +36,19 @@ if ($_POST) {
 
 ?>
 
-    <h1>Register</h1>
-    <form action="register.php" method="post" class="main-form">
-        <label for="name">Username</label>
-        <input type="text" name="name" id="name">
+    <div class="main-container">
+        <form action="register.php" method="post" class="main-form projects-container">
+            <h1>Register</h1>
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
+            <label for="name">Username</label>
+            <input type="text" name="name" id="name">
 
-        <button type="submit">Register</button>
-        <button type="button"><a href="login.php">Se connecter</a></button>
-    </form>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+
+            <button type="submit">Register</button>
+            <button type="button"><a href="login.php">Se connecter</a></button>
+        </form>
+    </div>
 
 <?php require('./layout/footer.php'); ?>

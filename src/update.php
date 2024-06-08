@@ -5,6 +5,7 @@ global $projectsManager;
 
 if (!$_SESSION && !$_SESSION['is_connected']) {
     echo "<script>window.location.href='login.php'</script>";
+    return;
 }
 
 if ($_POST) {
@@ -52,6 +53,7 @@ if ($_POST) {
 
 if (!$_GET["project_id"] || !is_numeric($_GET["project_id"])) {
     echo "<script>window.location.href='index.php'</script>";
+    return;
 }
 
 $project = $projectsManager->get($_GET["project_id"]);
@@ -64,18 +66,20 @@ if ($project->getUserName() !== $_SESSION['is_connected']) {
 
 ?>
 
-    <h1>Edit project</h1>
+    <div class="main-container">
+        <form action="update.php" method="post" enctype="multipart/form-data" class="main-form projects-container">
+            <h1>Edit project</h1>
 
-    <form action="update.php" method="post" enctype="multipart/form-data" class="main-form">
-        <input type="hidden" name="project_id" value="<?php echo $project->getId(); ?>">
-        <label for="icon">Icon</label>
-        <input type="file" name="icon" id="icon" accept="image/png" required>
+            <input type="hidden" name="project_id" value="<?php echo $project->getId(); ?>">
+            <label for="icon">Icon</label>
+            <input type="file" name="icon" id="icon" accept="image/png" required>
 
-        <label for="description">Description</label>
-        <textarea name="description" id="description" maxlength="2048"
-                  required><?php echo $project->getDescription(); ?></textarea>
+            <label for="description">Description</label>
+            <textarea name="description" id="description" maxlength="2048"
+                      required><?php echo $project->getDescription(); ?></textarea>
 
-        <input type="submit" value="Edit project" class="bouton">
-    </form>
+            <input type="submit" value="Edit project" class="bouton">
+        </form>
+    </div>
 
 <?php require('./layout/footer.php'); ?>
