@@ -32,7 +32,7 @@ class ProjectsManager
         $req->execute();
 
         $data = $req->fetch();
-        return new Project($data);
+        return $data ? new Project($data) : false;
     }
 
     public function update(array $data): void

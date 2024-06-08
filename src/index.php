@@ -18,33 +18,38 @@ if ($_SESSION && $_SESSION["is_connected"]) {
 
 // Récupère la liste des projets
 $projects = $projectsManager->list();
-echo "<div style='display: flex; flex-direction: column; gap: 1rem; max-width: 36rem; padding: 1rem'>";
-foreach ($projects as $project) {
-    $avg = $projectsReviewManager->getAvgForProject($project['id']);
-    $avgText = ($avg == null ? 'Pas encore de note' : $avg);
-    echo "<div class='project'>
-            <div style='display: flex; flex-direction: row; align-items: center; gap: 1rem; position: relative;'>
-                <img class='projet-image' src='" . $project['icon_url'] . "' alt='Icone du projet'>
-                <h2 style='height: 2rem; text-align: center; text-justify: auto'>" . $project['name'] . "</h2>
-                <span style='position: absolute; right: 0; top: 0'>Note moyenne : " . $avgText . "</span>
-            </div>
-            <p>" . $project['description'] . "</p>
-            <div style='display: flex; flex-direction: row; gap: 1rem'>
-                <button type='button'><a href='" . $project['gh_url'] . "'>GitHub</a></button>";
-    if ($_SESSION && $_SESSION["is_connected"] && $_SESSION["is_connected"] == $project['user_name']) {
-        echo "<form action='delete.php' method='post'>";
-        echo "<input type='hidden' name='id' value='" . $project['id'] . "'>";
-        echo "<button type='submit'>Supprimer</button>";
-        echo "</form>";
-        echo "<button type='button'><a href='update.php?project_id=" . $project['id'] . "'>Modify</a></button>";
-    }
-    if ($_SESSION && $_SESSION["is_connected"]) {
-        echo "<button type='button'><a href='create_review.php?project_id=" . $project['id'] . "'>Review</a></button>";
-    }
-    echo "</div></div>";
-}
-echo "</div>";
 ?>
+
+    <div style='display: flex; flex-direction: column; gap: 1rem; max-width: 36rem; padding: 1rem'>
+        <?php foreach ($projects as $project) :
+            $avg = $projectsReviewManager->getAvgForProject($project->getId());
+            $avgText = ($avg == null ? 'Pas encore de note' : $avg);
+            ?>
+            <div class="project">
+                <div class="project-header">
+                    <img class="projet-image" src="<?php echo $project->getIconUrl() ?>" alt="Icone du projet">
+                    <h2><?php echo $project->getName() ?></h2>
+                    <span><?php echo $avgText ?></span>
+                </div>
+                <p><?php echo $project->getDescription() ?></p>
+                <div class="project-actions">
+                    <?php if ($_SESSION && $_SESSION["is_connected"] && $_SESSION["is_connected"] == $project->getUserName()) : ?>
+                        <form action="delete.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $project->getId() ?>">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    <?php endif; ?>
+                    <?php if ($_SESSION && $_SESSION["is_connected"]) : ?>
+                        <button type="button"><a
+                                href="create_review.php?project_id=<?php echo $project->getId() ?>">Review</a>
+                        </button>
+                    <?php else : ?>
+                        <button type="button"><a href="login.php">Review</a></button>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 
 
 <?php require("./layout/footer.php"); ?>
