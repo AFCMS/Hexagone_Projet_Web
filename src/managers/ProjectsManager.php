@@ -58,7 +58,7 @@ class ProjectsManager
     {
         $req = $this->db->prepare('SELECT * FROM projects');
         $req->execute();
-        return $req->fetchAll();
+        return array_map(fn($data) => new Project($data), $req->fetchAll());
     }
 
     public function listFiltered(string $filter): array
