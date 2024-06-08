@@ -25,7 +25,7 @@ class ProjectsManager
         $req->execute();
     }
 
-    public function get(int $id): Project
+    public function get(int $id): Project|false
     {
         $req = $this->db->prepare('SELECT * FROM projects WHERE id = :id');
         $req->bindValue(':id', $id);
