@@ -78,4 +78,19 @@ class ProjectsReviewManager
         $req->execute();
         return $req->fetchAll();
     }
+
+    public function hasReviewed(string $user_name, int $id): bool
+    {
+        return $this->getUserReview($user_name, $id) !== false;
+    }
+
+    public function getUserReview(string $user_name, int $id): ProjectReview|false
+    {
+        $req = $this->db->prepare('SELECT * FROM projects_reviews WHERE user_name = :user_name AND project_id = :id');
+        $req->bindValue(':user_name', $user_name);
+        $req->bindValue(':id', $id);
+        $req->execute();
+        $data = $req->fetch();
+        return $data ? new ProjectReview($data) : false;
+    }
 }
