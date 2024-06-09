@@ -3,10 +3,21 @@ global $projectsManager;
 global $projectsReviewManager;
 
 // TODO: filter projects
-$projects = $projectsManager->list();
+if ($_GET["search"]) {
+    $projects = $projectsManager->listFiltered($_GET["search"]);
+} else {
+    $projects = $projectsManager->list();
+}
 ?>
     <div class="main-container">
         <div class="projects-container">
+            <div class="project">
+                <form action="index.php" method="get">
+                    <label for="search">Rechercher un projet</label>
+                    <input type="text" name="search" id="search" value="<?php echo $_GET["search"] ?>">
+                    <input type="submit">
+                </form>
+            </div>
             <?php foreach ($projects as $project) :
                 $avg = $projectsReviewManager->getAvgForProject($project->getId());
                 $avgText = ($avg == null ? 'Pas encore de note' : starsHTML($avg));
