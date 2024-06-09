@@ -6,6 +6,7 @@ require_once 'managers/UsersManager.php';
 require_once 'models/Project.php';
 require_once 'models/ProjectReview.php';
 require_once 'models/User.php';
+require_once 'utils/stars.php';
 
 $dbname = 'app_db';
 $dbuser = 'db_user';

@@ -9,7 +9,7 @@ $projects = $projectsManager->list();
         <div class="projects-container">
             <?php foreach ($projects as $project) :
                 $avg = $projectsReviewManager->getAvgForProject($project->getId());
-                $avgText = ($avg == null ? 'Pas encore de note' : $avg);
+                $avgText = ($avg == null ? 'Pas encore de note' : starsHTML($avg));
                 ?>
                 <div class="project">
                     <div class="project-header">
