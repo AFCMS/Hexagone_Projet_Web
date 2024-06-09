@@ -61,11 +61,14 @@ class ProjectsManager
         return array_map(fn($data) => new Project($data), $req->fetchAll());
     }
 
+    /**
+     * @return Project[]
+     */
     public function listFiltered(string $filter): array
     {
         $req = $this->db->prepare('SELECT * FROM projects WHERE LOWER(name) LIKE LOWER(:filter)');
         $req->bindValue(':filter', "%$filter%");
         $req->execute();
-        return $req->fetchAll();
+        return array_map(fn($data) => new Project($data), $req->fetchAll());
     }
 }
