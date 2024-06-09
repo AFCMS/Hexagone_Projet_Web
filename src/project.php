@@ -19,7 +19,7 @@ if (!$project) {
 }
 
 $avg = $projectsReviewManager->getAvgForProject($project_id);
-$avgText = ($avg == null ? 'Pas encore de note' : $avg);
+$avgText = ($avg == null ? 'Pas encore de note' : starsHTML($avg));
 
 $reviews = $projectsReviewManager->getForProject($project_id);
 ?>
@@ -66,9 +66,10 @@ $reviews = $projectsReviewManager->getForProject($project_id);
                 <?php foreach ($reviews as $review) : ?>
                     <div class="review"
                          style="border-bottom-color: gray; border-bottom-style: dashed; padding-bottom: 1rem">
-                        <div class="review-header" style="margin-bottom: 1rem">
+                        <div class="review-header" style="margin-bottom: 1rem; position: relative">
                             <span><strong><?php echo $review->getUserName() ?></strong></span>
-                            <span style=""><?php echo $review->getNote() ?></span>
+                            <span
+                                style="flex: 1; position: absolute; right: 0; top: 0"><?php echo starsHTML($review->getNote()) ?></span>
                         </div>
                         <p><?php echo $review->getText() ?></p>
                     </div>
