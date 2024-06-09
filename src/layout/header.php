@@ -44,10 +44,10 @@ session_start();
             <li class="bouton"><a href="/index.php">Home</a></li>
             <li class="bouton"><a href="/create.php">Add project</a></li>
             <?php if (isset($_SESSION['is_connected'])): ?>
-                <li class="bouton"><a href="/logout.php">Logout</a></li>
+                <li class="bouton" style="text-decoration-line: underline; background-color: transparent"><a
+                        href="/logout.php"><?php echo $_SESSION["is_connected"] ?></a></li>
             <?php else: ?>
                 <li class="bouton"><a href="/login.php">Login</a></li>
-                <li class="bouton"><a href="/register.php">Register</a></li>
             <?php endif; ?>
         </ul>
     </nav>
