@@ -156,10 +156,7 @@ button > a, .bouton > a {
 
 .stars {
     font-size: 1em;
-    direction: ltr;
     color: gold;
-    overflow: hidden;
-    white-space: nowrap;
     background-color: darkblue;
     border-radius: 0.375rem;
     padding: 2px;
