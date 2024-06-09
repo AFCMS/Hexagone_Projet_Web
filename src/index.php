@@ -3,7 +3,7 @@ global $projectsManager;
 global $projectsReviewManager;
 
 // TODO: filter projects
-if ($_GET["search"]) {
+if ($_GET && $_GET["search"]) {
     $projects = $projectsManager->listFiltered($_GET["search"]);
 } else {
     $projects = $projectsManager->list();
@@ -12,10 +12,12 @@ if ($_GET["search"]) {
     <div class="main-container">
         <div class="projects-container">
             <div class="project">
-                <form action="index.php" method="get">
+                <form action="index.php" method="get" class=""
+                      style="display: flex; flex-direction: row; align-items: baseline; gap: 1rem">
                     <label for="search">Rechercher un projet</label>
-                    <input type="text" name="search" id="search" value="<?php echo $_GET["search"] ?>">
-                    <input type="submit">
+                    <input type="text" name="search" id="search"
+                           value="<?php echo ($_GET && $_GET["search"]) ? $_GET["search"] : "" ?>">
+                    <input type="submit" class="bouton" style="">
                 </form>
             </div>
             <?php foreach ($projects as $project) :
