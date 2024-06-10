@@ -84,6 +84,46 @@ if ($_POST) {
 
             <input type="submit" value="Add project" class="bouton">
         </form>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.querySelector('.main-form');
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Prevent the form from submitting
+
+                    const ghUrlInput = document.getElementById('gh_url');
+                    const ghUrl = ghUrlInput.value;
+
+                    // Extract user and repo from GitHub URL
+                    const match = ghUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+                    if (match) {
+                        const user = match[1];
+                        const repo = match[2];
+
+                        // GitHub API URL
+                        const apiUrl = `https://api.github.com/repos/${user}/${repo}`;
+
+                        // Check if the repository exists
+                        fetch(apiUrl)
+                            .then(response => {
+                                if (response.ok) {
+                                    // If the repository exists, submit the form
+                                    form.submit();
+                                } else {
+                                    // If the repository does not exist, show an error
+                                    alert('GitHub repository does not exist. Please enter a valid repository URL.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                alert('An error occurred while validating the GitHub URL.');
+                            });
+                    } else {
+                        alert('Please enter a valid GitHub URL.');
+                    }
+                });
+            });
+        </script>
     </div>
 
 <?php require('./layout/footer.php'); ?>
