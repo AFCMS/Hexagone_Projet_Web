@@ -16,7 +16,6 @@ docker compose up
 
 ```shell
 az login
-az acr login --name hexaprojetweb
 ```
 
 ### Azure Resource Group
@@ -29,6 +28,7 @@ az group create --location westeurope --name HexagoneProjetWeb
 
 ```shell
 az acr create --resource-group HexagoneProjetWeb --name hexaprojetweb --sku Basic
+az acr login --name hexaprojetweb
 ```
 
 ### Build Production Image
