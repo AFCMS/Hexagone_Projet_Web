@@ -4,7 +4,13 @@ global $projectsManager;
 
 function isGithubRepo($url): bool
 {
-    // TODO: this doesn't match the part /user/repo
+    $githubUrlRegex = '/https:\/\/github\.com\/[a-zA-Z0-9\-]+\/[a-zA-Z0-9\-]+/';
+
+    if (!preg_match($githubUrlRegex, $url)) {
+        echo '<script>alert("Invalid GitHub URL");</script>';
+        return false;
+    }
+
     $ch = curl_init($url);
 
     curl_setopt($ch, CURLOPT_NOBODY, true);
@@ -44,7 +50,6 @@ if ($_POST) {
         $targetFile = 'uploads/' . $fileName;
         print_r($_FILES['icon']['tmp_name']);
         if (pathinfo($_FILES['icon']['name'], PATHINFO_EXTENSION) == "png") {
-            echo "COUCOU";
             move_uploaded_file($_FILES['icon']['tmp_name'], $targetFile);
 
             $_POST['icon_url'] = $targetFile;
@@ -79,7 +84,6 @@ if ($_POST) {
 
             <input type="submit" value="Add project" class="bouton">
         </form>
-
     </div>
 
 <?php require('./layout/footer.php'); ?>
